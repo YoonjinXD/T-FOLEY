@@ -1,8 +1,8 @@
 params = {
 
     # --- Data --- : provide lists of folders that contain .wav files
-    'train_dirs': ['./data/train.txt'],
-    'test_dirs': ['./data/test.txt'],
+    'train_dirs': ['./DCASE_2023_Challenge_Task_7_Dataset/DevMeta.csv'],
+    'test_dirs': ['./DCASE_2023_Challenge_Task_7_Dataset/EvalMeta.csv'],
     'sample_rate': 22050,
     'audio_length': 88200,  # traning data seconds * sample_rate
     
@@ -24,7 +24,7 @@ params = {
     
     # --- Training ---
     'lr':                          1e-4,
-    'batch_size':                  16,
+    'batch_size':                  64,
     'ema_rate':                    0.999,
     'scheduler_patience_epoch':    25,
     'scheduler_factor':            0.8,

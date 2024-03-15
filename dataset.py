@@ -5,8 +5,6 @@ import numpy as np
 import torch
 import torchaudio
 from torch.utils.data.distributed import DistributedSampler
-
-torchaudio.set_audio_backend("sox_io")
 from utils import get_event_cond
 
 
@@ -46,6 +44,7 @@ class AudioDataset(torch.utils.data.Dataset):
         with open(filelist_path, 'r') as f:
             reader = csv.reader(f)
             filelist = [row[0] for row in reader]
+            f.close()
         return filelist
     
     def moving_avg(self, input, window_size):
@@ -63,7 +62,7 @@ class AudioDataset(torch.utils.data.Dataset):
     
     
 
-def from_path(data_dirs, params, labels, num_workers=os.cpu_count()//4, distributed=False):
+def from_path(data_dirs, params, labels, num_workers, distributed=False):
     dataset = AudioDataset(data_dirs, params, labels)
     if distributed:
         return torch.utils.data.DataLoader(
