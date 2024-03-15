@@ -24,6 +24,13 @@ To get started, please prepare the codes and python environment.
     ```
 
 
+## Dataset
+
+To train and evaluate our model, we used [DCASE 2023 Challenge Task 7](https://zenodo.org/records/8091972) which was constructed for Foley Sound Synthesis.
+To evaluate our mode, we used the [subsets](https://yoonjinxd.github.io/Event-guided_FSS_Demo.github.io/#-vocal-imitating-dataset) of [VocalImitationSet](https://zenodo.org/records/1340763) and [VocalSketch](https://zenodo.org/records/1251982). These vocal imitating sets consist of vocal audios that mimick event-based or environmental sounds.
+Click the link above links to download the corresponding datasets.
+
+
 ## Inference
 
 To perform inference using our model, follow these steps:
