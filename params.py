@@ -1,8 +1,8 @@
 params = {
 
     # --- Data --- : provide lists of folders that contain .wav files
-    'train_dirs': ['./filelists/train.txt'],
-    'test_dirs': ['./filelists/test.txt'],
+    'train_dirs': ['./data/train.txt'],
+    'test_dirs': ['./data/test.txt'],
     'sample_rate': 22050,
     'audio_length': 88200,  # traning data seconds * sample_rate
     
@@ -24,7 +24,7 @@ params = {
     
     # --- Training ---
     'lr':                          1e-4,
-    'batch_size':                  8,
+    'batch_size':                  16,
     'ema_rate':                    0.999,
     'scheduler_patience_epoch':    25,
     'scheduler_factor':            0.8,

@@ -1,3 +1,4 @@
+import csv
 import os
 
 import numpy as np
@@ -43,7 +44,8 @@ class AudioDataset(torch.utils.data.Dataset):
         
     def parse_filelist(self, filelist_path):
         with open(filelist_path, 'r') as f:
-            filelist = [line.strip() for line in f.readlines()]
+            reader = csv.reader(f)
+            filelist = [row[0] for row in reader]
         return filelist
     
     def moving_avg(self, input, window_size):
@@ -61,7 +63,7 @@ class AudioDataset(torch.utils.data.Dataset):
     
     
 
-def from_path(data_dirs, params, labels, num_workers=os.cpu_count(), distributed=False):
+def from_path(data_dirs, params, labels, num_workers=os.cpu_count()//4, distributed=False):
     dataset = AudioDataset(data_dirs, params, labels)
     if distributed:
         return torch.utils.data.DataLoader(

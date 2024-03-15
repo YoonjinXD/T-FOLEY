@@ -7,8 +7,8 @@ import numpy as np
 import torch
 import torch.nn as nn
 from dataset import from_path as dataset_from_path
-from sampler import SDESampling
 from model import UNet
+from sampler import SDESampling
 from sde import SubVpSdeCos
 from torch.nn.parallel import DistributedDataParallel
 from torch.utils.tensorboard import SummaryWriter
@@ -144,7 +144,7 @@ class Learner:
         return loss
     
     
-    # Test(=validation)
+    # Test
     def test_set_evaluation(self):
         with torch.no_grad():
             self.model.eval()
