@@ -358,6 +358,8 @@ class GBlock(nn.Module):
 class UNet(nn.Module):
     def __init__(self, num_classes, params):
         super().__init__()
+        print("Model initializing... This can take a few minutes.")
+
         # Hyperparameter Settings
         sequential = params['sequential']
         assert sequential in ['lstm', 'attn', None], "Choose sequential between \'lstm\' or \'attn\', None."
@@ -374,7 +376,7 @@ class UNet(nn.Module):
         cond_drop_prob = params['cond_prob']
         film_type = params['film_type']
         
-        # Header Layers
+        # Pre-conv/emb Layers
         self.conv_1 = Conv1d(1, dims[0], 5, padding=2)
         self.embedding = RFF_MLP_Block(time_emb_dim)
         
@@ -417,7 +419,9 @@ class UNet(nn.Module):
             nn.Linear(class_emb_dim, classes_dim),
             nn.SiLU(),
             nn.Linear(classes_dim, class_emb_dim)
-        )  
+        ) 
+
+        print("Model successfully initialized!")
 
     def forward(self, audio, sigma, classes, events, cond_drop_prob=None):
         batch, device = audio.shape[0], audio.device

@@ -17,14 +17,14 @@ params = {
     'class_emb_dim':               512,
     'mid_dim':                     512,
     'film_type':                   'block', # {None, temporal, block}
-    'block_nums':                  [98,98,98,98,98,98,14],
+    'block_nums':                  [49,49,49,49,49,49,14],
     'event_type':                  'rms', # {rms, power, onset}
-    'event_dims':                  {'rms': 690, 'power': 690, 'onset': 88200},
+    'event_dims':                  {'rms': 690, 'power': 88200, 'onset': 88200},
     'cond_prob':                   [0.1, 0.1], # [class prob, event prob]
     
     # --- Training ---
     'lr':                          1e-4,
-    'batch_size':                  64,
+    'batch_size':                  16,
     'ema_rate':                    0.999,
     'scheduler_patience_epoch':    25,
     'scheduler_factor':            0.8,

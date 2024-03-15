@@ -6,13 +6,14 @@ from glob import glob
 import numpy as np
 import torch
 import torch.nn as nn
+from torch.nn.parallel import DistributedDataParallel
+from torch.utils.tensorboard import SummaryWriter
+from tqdm import tqdm
+
 from dataset import from_path as dataset_from_path
 from model import UNet
 from sampler import SDESampling
 from sde import SubVpSdeCos
-from torch.nn.parallel import DistributedDataParallel
-from torch.utils.tensorboard import SummaryWriter
-from tqdm import tqdm
 from utils import get_event_cond, high_pass_filter, normalize, plot_env
 
 LABELS = ['DogBark', 'Footstep', 'GunShot', 'Keyboard', 'MovingMotorVehicle', 'Rain', 'Sneeze_Cough']
@@ -339,6 +340,7 @@ def train(params):
 
 
 def train_distributed(replica_id, replica_count, port, params):
+    print(f"Replica {replica_id} of {replica_count} started")
     os.environ["MASTER_ADDR"] = "localhost"
     os.environ["MASTER_PORT"] = str(port)
     torch.distributed.init_process_group(
@@ -348,8 +350,8 @@ def train_distributed(replica_id, replica_count, port, params):
     torch.cuda.set_device(device)
 
     model = UNet(num_classes=len(LABELS), params=params).cuda()
-    train_set = dataset_from_path(params['train_dirs'], params, LABELS, num_workers=os.cpu_count()//2, distributed=True)
-    test_set = dataset_from_path(params['test_dirs'], params, LABELS, num_workers=os.cpu_count()//2)
+    train_set = dataset_from_path(params['train_dirs'], params, LABELS, distributed=True)
+    test_set = dataset_from_path(params['test_dirs'], params, LABELS)
     model = DistributedDataParallel(model, device_ids=[replica_id], find_unused_parameters=True)
 
     _train_impl(replica_id, model, train_set, test_set, params, distributed=True)

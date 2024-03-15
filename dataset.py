@@ -5,6 +5,7 @@ import numpy as np
 import torch
 import torchaudio
 from torch.utils.data.distributed import DistributedSampler
+
 from utils import get_event_cond
 
 
@@ -41,11 +42,19 @@ class AudioDataset(torch.utils.data.Dataset):
         }
         
     def parse_filelist(self, filelist_path):
-        with open(filelist_path, 'r') as f:
-            reader = csv.reader(f)
-            filelist = [row[0] for row in reader]
-            f.close()
-        return filelist
+        # if filelist_path is txt file
+        if filelist_path.endswith('.txt'):
+            with open(filelist_path, 'r') as f:
+                filelist = [line.strip() for line in f.readlines()]
+            return filelist
+        
+        # if filelist_path is csv file
+        if filelist_path.endswith('.csv'):
+            with open(filelist_path, 'r') as f:
+                reader = csv.reader(f)
+                filelist = [row[0] for row in reader]
+                f.close()
+            return filelist
     
     def moving_avg(self, input, window_size):
         if type(input) != list: input = list(input)
@@ -62,7 +71,7 @@ class AudioDataset(torch.utils.data.Dataset):
     
     
 
-def from_path(data_dirs, params, labels, num_workers, distributed=False):
+def from_path(data_dirs, params, labels, distributed=False):
     dataset = AudioDataset(data_dirs, params, labels)
     if distributed:
         return torch.utils.data.DataLoader(
@@ -70,7 +79,7 @@ def from_path(data_dirs, params, labels, num_workers, distributed=False):
             batch_size=params['batch_size'],
             collate_fn=None,
             shuffle=False,
-            num_workers=num_workers,
+            num_workers=params['num_workers'],
             pin_memory=True,
             drop_last=True,
             sampler=DistributedSampler(dataset))
@@ -79,6 +88,6 @@ def from_path(data_dirs, params, labels, num_workers, distributed=False):
         batch_size=params['batch_size'],
         collate_fn=None,
         shuffle=True,
-        num_workers=num_workers,
+        num_workers=os.cpu_count()//4,
         pin_memory=True,
         drop_last=True)
