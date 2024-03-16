@@ -75,30 +75,6 @@ def pooling(x):
 
 
 # --- Plot ---
-def save_figure_to_numpy(fig):
-    # save it to a numpy array.
-    data = np.fromstring(fig.canvas.tostring_rgb(), dtype=np.uint8, sep='')
-    data = data.reshape(fig.canvas.get_width_height()[::-1] + (3,))
-    return data
-    
-def plot_spec(waveform, sample_rate):
-    # Transform to mel-spec
-    transform = MelSpectrogram(sample_rate)
-    mel_spec = transform(waveform)
-    
-    # Plot
-    plt.style.use('default')
-    fig, ax = plt.subplots(figsize=(12, 3))
-    im = ax.imshow(mel_spec)
-    plt.colorbar(im, ax=ax)
-    plt.tight_layout()
-    
-    # Turn into numpy format to upload to tensorboard
-    fig.canvas.draw()
-    data = save_figure_to_numpy(fig)
-    plt.close()
-    return data
-
 def plot_env(waveform):
     # Plot
     plt.style.use('default')

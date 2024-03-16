@@ -97,7 +97,7 @@ def main(args):
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model_path', type=str, default='./pretrained/best.ckpt')
+    parser.add_argument('--model_path', type=str, default='./pretrained/block-49_epoch-500.pt')
     parser.add_argument('--param_path', type=str, default='./pretrained/params.json')
     parser.add_argument('--target_audio', type=str, help='Path to the target audio file.', default=None)
     # TODO: 여기 인자 이름 안 받고 그냥 인풋처럼 받을 수 없는지?

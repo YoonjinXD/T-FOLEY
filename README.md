@@ -58,13 +58,16 @@ To train the T-Foley model, follow these steps:
     $ pip install -r requirements.txt
     ```
 
-2. Download and unzip the DCASE_2023_Challenge_Task_7_Dataset:
+2. Download and unzip the [DCASE 2023 task 7 dataset](https://zenodo.org/records/8091972). Due to the mismatch between csv and actual data files, please make actual filelists(.txt) using the provided scripts:
     ```bash
     $ wget http://zenodo.org/records/8091972/files/DCASE_2023_Challenge_Task_7_Dataset.tar.gz
     $ tar -zxvf DCASE_2023_Challenge_Task_7_Dataset.tar.gz
+    $ sh rename_dirs.sh
+    $ sh make_filelist.sh
     ```
     
-    If you use other dataset, prepare file path list of your training data as .csv format and configure to `params.py`.
+    If you use other dataset, prepare file path list of your training data as .txt format and configure to `params.py`.
+
 
 3. Run the training:
     ```bash

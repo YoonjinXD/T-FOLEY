@@ -1,10 +1,11 @@
 params = {
 
     # --- Data --- : provide lists of folders that contain .wav files
-    'train_dirs': ['./DCASE_2023_Challenge_Task_7_Dataset/DevMeta.csv'],
-    'test_dirs': ['./DCASE_2023_Challenge_Task_7_Dataset/EvalMeta.csv'],
+    'train_dirs': ['./DCASE_2023_Challenge_Task_7_Dataset/train.txt'],
+    'test_dirs': ['./DCASE_2023_Challenge_Task_7_Dataset/eval.txt'],
     'sample_rate': 22050,
     'audio_length': 88200,  # traning data seconds * sample_rate
+    'num_workers': 4,
     
     # --- Model ---
     'model_dir':                   'logs/test/',
