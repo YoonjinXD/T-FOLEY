@@ -40,9 +40,12 @@ Click the link above links to download the corresponding datasets.
 
 To perform inference using our model, follow these steps:
 
-1. Download the pre-trained model weights and configurations from the following link: [prertrained.zip](TBD).
+1. Download the pre-trained model weights and configurations from the following link: [prertrained.zip](https://zenodo.org/records/10826692).
 
-2. Place the downloaded model weights and config file in the `./pretrained` directory.
+2. Unzip and place the downloaded model weights and config json file in the `./pretrained` directory.
+    ```
+    unzip pretrained.zip
+    ```
 
 3. Run the inference script by executing the following command:
     ```bash
