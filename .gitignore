@@ -1,0 +1,5 @@
+__pycache__/
+logs/
+pretrained/
+results/
+DCASE_2023_Challenge_Task_7_Dataset/

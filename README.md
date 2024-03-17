@@ -25,6 +25,11 @@ To get started, please prepare the codes and python environment.
 
 2. Install the required dependencies by running the following command:
     ```bash
+    # (Optional) Create a conda virtual emvironment
+    $ conda create -n tfoley python=3.8.0
+    $ conda activate tfoley
+    # Install dependency with pip. Choose appropriate cuda version
+    $ pip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cu118
     $ pip install -r requirements.txt
     ```
 
@@ -41,10 +46,13 @@ Click the link above links to download the corresponding datasets.
 To perform inference using our model, follow these steps:
 
 1. Download the pre-trained model weights and configurations from the following link: [prertrained.zip](https://zenodo.org/records/10826692).
+    ```bash
+    $ wget https://zenodo.org/records/10826692/files/pretrained.zip
+    ```
 
 2. Unzip and place the downloaded model weights and config json file in the `./pretrained` directory.
-    ```
-    unzip pretrained.zip
+    ```bash
+    $ unzip pretrained.zip
     ```
 
 3. Run the inference script by executing the following command:
@@ -61,12 +69,7 @@ To perform inference using our model, follow these steps:
 
 To train the T-Foley model, follow these steps:
 
-1. Install the required dependencies by running the following command:
-    ```bash
-    $ pip install -r requirements.txt
-    ```
-
-2. Download and unzip the [DCASE 2023 task 7 dataset](https://zenodo.org/records/8091972). Due to the mismatch between csv and actual data files, please make actual filelists(.txt) using the provided scripts:
+1. Download and unzip the [DCASE 2023 task 7 dataset](https://zenodo.org/records/8091972). Due to the mismatch between the provided csv and actual data files, please make valid filelists(.txt) using the provided scripts:
     ```bash
     $ wget http://zenodo.org/records/8091972/files/DCASE_2023_Challenge_Task_7_Dataset.tar.gz
     $ tar -zxvf DCASE_2023_Challenge_Task_7_Dataset.tar.gz
@@ -77,7 +80,7 @@ To train the T-Foley model, follow these steps:
     If you use other dataset, prepare file path list of your training data as .txt format and configure to `params.py`.
 
 
-3. Run the training:
+2. Run the training:
     ```bash
     $ python train.py
     ```
