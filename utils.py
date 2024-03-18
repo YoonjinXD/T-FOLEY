@@ -62,8 +62,7 @@ def zero_phased_filter(x):
     x = filtfilt(b, a, x, method="gust")
     return x
 
-def pooling(x):
-    block_num = 490
+def pooling(x, block_num=49):
     block_size = x.shape[-1] // block_num
     
     device = x.device

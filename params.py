@@ -8,7 +8,7 @@ params = {
     'num_workers': 4,
     
     # --- Model ---
-    'model_dir':                   'logs/test/',
+    'model_dir':                   'logs/',
     'sequential':                  'lstm',
     'factors':                     [2,2,3,3,5,5,7],
     'dims':                        [32,64,128,128,256,256,512,512],
