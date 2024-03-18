@@ -5,6 +5,7 @@ llvmlite==0.41.1
 matplotlib==3.7.5
 numpy==1.24.4
 pillow==10.2.0
+protobuf==4.25.3
 pydub==0.25.1
 pyparsing
 python-dateutil==2.9.0.post0
