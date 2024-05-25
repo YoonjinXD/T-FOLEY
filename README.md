@@ -63,6 +63,7 @@ To perform inference using our model, follow these steps:
     The class_name **must be** one of the class name of [2023 DCASE Task7 dataset](https://dcase.community/challenge2023/task-foley-sound-synthesis). The list of the class name: `"DogBark", "Footstep", "GunShot", "Keyboard", "MovingMotorVehicle", "Rain", "Sneeze_Cough"`
 
 4. The generated samples would be saved in the `./results` directory.
+5. For FAD evaluation, we utilized this toolkit: [FAD tookit](https://github.com/jnwnlee/fadtk)
 
 
 ## Training
